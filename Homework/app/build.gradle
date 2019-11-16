@@ -1,0 +1,56 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.example.homework"
+        minSdkVersion 24
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    //虚拟机安装错误  解决
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a', 'x86_64'
+            universalApk true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    testOptions {
+
+        unitTests.returnDefaultValues = true
+
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'junit:junit:4.12'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    implementation 'androidx.test:runner:1.3.0-alpha02'
+
+    annotationProcessor 'androidx.annotation:annotation:1.0.0'
+    implementation("com.github.bumptech.glide:glide:4.9.0") {
+        exclude group: "com.android.support"
+    }
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
+    implementation("com.squareup.okhttp3:okhttp:4.2.2")
+    implementation 'net.coobird:thumbnailator:0.4.8'
+    implementation 'com.alibaba:fastjson:1.2.10'
+}
